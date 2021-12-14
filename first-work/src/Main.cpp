@@ -115,9 +115,7 @@ int main(int argc, char* argv[])
     inputFileB.close();
 
     //
-    std::string filename_output_matrix = "out/matrizes/";
-    filename_output_matrix += solution;
-    filename_output_matrix += "/C"+std::to_string(orderMatrix)+"x"+std::to_string(orderMatrix)+".txt";
+    std::string filename_output_matrix = "out/matrizes/C"+std::to_string(orderMatrix)+"x"+std::to_string(orderMatrix)+".txt";
 
     std::string filename_output_time = "out/tempo/";
     filename_output_time += solution;
