@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(ConcurrentProgramming)
 
-set ( CMAKE_CXX_FLAGS "-Wall" )
+set ( CMAKE_CXX_FLAGS "-Wall -pthread" )
 
 include_directories( include )
 
