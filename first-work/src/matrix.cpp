@@ -5,10 +5,10 @@
 
 namespace matrix {
 	void multiply_matrices_sequential( T **A, T **B, T **C, int m, int n, int p ) {
-		for(int i=0; i<m; i++){
-			for(int j=0; j<n; j++){
+		for(int i=0; i<m; ++i){
+			for(int j=0; j<n; ++j){
 				T sum = 0;
-				for(int k=0; k<p; k++){
+				for(int k=0; k<p; ++k){
 					sum += (A[i][k]*B[k][j]);
 				}
 				C[i][j]=sum;
