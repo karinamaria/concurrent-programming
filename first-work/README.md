@@ -12,8 +12,15 @@ Para compilar esse projeto com o [cmake](https://cmake.org) siga os passos:
 
 Os executáveis estarão no diretório `build`
 
+# Observações
+Antes de executar o programa, certifique-se de possuir as seguintes pastas:
+1. `out/matrizes`: para saída das matrizes produto
+2. `out/tempo/S`: para saída dos tempos de execução do algoritmo sequencial
+3. `out/tempo/C`: para saída dos tempos de execução do algoritmo concorrente
+
 
 # Execução
+No diretório principal do projeto, execute:
 
 ```
 $ ./build/main
