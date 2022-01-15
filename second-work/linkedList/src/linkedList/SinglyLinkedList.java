@@ -1,12 +1,17 @@
 package linkedList;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class SinglyLinkedList<T> {
     private Node<T> head;
     private int size;
+    private Lock lock;
 
     public SinglyLinkedList() {
         head = null;
         size = 0;
+        lock = new ReentrantLock(true);
     }
 
     public boolean add(T data){
@@ -31,18 +36,26 @@ public class SinglyLinkedList<T> {
     }
 
     public boolean remove(Object o) {
+        lock.lock();
+        System.out.println("[" + Thread.currentThread().getName() + "] Tentando remover " + o);
+
         Node<T> current = head;
         Node<T> previous = null;
         for (int i = 0; i < size; i++){
             if(current.data.equals(o)){
                 remove(current, previous);
                 size--;
+
+                System.out.println("[" + Thread.currentThread().getName() + "] Item removido");
+                lock.unlock();
                 return true;
             }
             previous = current;
             current = current.next;
         }
 
+        System.out.println("[" + Thread.currentThread().getName() + "] Item não existe");
+        lock.unlock();
         return false;
     }
 
@@ -58,6 +71,8 @@ public class SinglyLinkedList<T> {
         checkIfDataIsNull(data);
         Node<T> newNode = new Node(data);
 
+        lock.lock();
+        System.out.println("[" + Thread.currentThread().getName() + "] Adicionando " + data);
         if(head == null){
             head = newNode;
         }else{
@@ -69,6 +84,8 @@ public class SinglyLinkedList<T> {
             current.next = newNode;
         }
         size++;
+        System.out.println("[" + Thread.currentThread().getName() + "] Item adicionado");
+        lock.unlock();
 
         return true;
     }
