@@ -36,6 +36,7 @@ public class SinglyLinkedList<T> {
         for (int i = 0; i < size; i++){
             if(current.data.equals(o)){
                 remove(current, previous);
+                size--;
                 return true;
             }
             previous = current;
