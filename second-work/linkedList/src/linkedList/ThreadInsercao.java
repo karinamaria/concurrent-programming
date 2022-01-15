@@ -12,8 +12,6 @@ public class ThreadInsercao extends Thread{
 
     @Override
     public void run() {
-//        System.out.println("Thread ["+ this.getName() +"] adicionando "+data);
         singlyLinkedList.add(data);
-//        System.out.println("============================================");
     }
 }
