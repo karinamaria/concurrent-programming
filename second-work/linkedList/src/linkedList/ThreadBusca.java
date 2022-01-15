@@ -12,8 +12,9 @@ public class ThreadBusca extends Thread{
 
     @Override
     public void run() {
-        System.out.println("Thread ["+ this.getName() +"] iniciando busca por "+data);
-        System.out.println("\tEncontrado? "+singlyLinkedList.contains(data));
-        System.out.println("============================================");
+//        System.out.println("Thread ["+ this.getName() +"] iniciando busca por "+data);
+//        System.out.println("\tEncontrado? "+singlyLinkedList.contains(data));
+        singlyLinkedList.contains(data);
+//        System.out.println("============================================");
     }
 }

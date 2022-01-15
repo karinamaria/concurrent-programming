@@ -1,17 +1,17 @@
 package linkedList;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class SinglyLinkedList<T> {
     private Node<T> head;
     private int size;
-    private Lock lock;
+    private ReadWriteLock lock;
 
     public SinglyLinkedList() {
         head = null;
         size = 0;
-        lock = new ReentrantLock(true);
+        lock = new ReentrantReadWriteLock(true);
     }
 
     public boolean add(T data){
@@ -24,19 +24,26 @@ public class SinglyLinkedList<T> {
     }
 
     public boolean contains(Object o){
+        lock.readLock().lock();
+        System.out.println("[" + Thread.currentThread().getName() + "] Buscando por " + o);
+
         Node<T> temp = head;
         for (int i = 0; i < size; i++){
             if(temp.data.equals(o)) {
+                System.out.println("[" + Thread.currentThread().getName() + "] Item encontrado");
+                lock.readLock().unlock();
                 return true;
             }
             temp = temp.next;
         }
 
+        System.out.println("[" + Thread.currentThread().getName() + "] Item não encontrado");
+        lock.readLock().unlock();
         return false;
     }
 
     public boolean remove(Object o) {
-        lock.lock();
+        lock.writeLock().lock();
         System.out.println("[" + Thread.currentThread().getName() + "] Tentando remover " + o);
 
         Node<T> current = head;
@@ -47,7 +54,7 @@ public class SinglyLinkedList<T> {
                 size--;
 
                 System.out.println("[" + Thread.currentThread().getName() + "] Item removido");
-                lock.unlock();
+                lock.writeLock().unlock();
                 return true;
             }
             previous = current;
@@ -55,7 +62,7 @@ public class SinglyLinkedList<T> {
         }
 
         System.out.println("[" + Thread.currentThread().getName() + "] Item não existe");
-        lock.unlock();
+        lock.writeLock().unlock();
         return false;
     }
 
@@ -71,7 +78,7 @@ public class SinglyLinkedList<T> {
         checkIfDataIsNull(data);
         Node<T> newNode = new Node(data);
 
-        lock.lock();
+        lock.writeLock().lock();
         System.out.println("[" + Thread.currentThread().getName() + "] Adicionando " + data);
         if(head == null){
             head = newNode;
@@ -85,7 +92,7 @@ public class SinglyLinkedList<T> {
         }
         size++;
         System.out.println("[" + Thread.currentThread().getName() + "] Item adicionado");
-        lock.unlock();
+        lock.writeLock().unlock();
 
         return true;
     }
