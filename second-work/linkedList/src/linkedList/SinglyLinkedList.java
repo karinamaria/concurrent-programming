@@ -53,26 +53,8 @@ public class SinglyLinkedList<T> {
         }
     }
 
-    private boolean pushFront(T data){
-        if(data == null)
-            throw new NullPointerException("Data is null");
-
-        Node<T> newNode = new Node(data);
-
-        if(head == null){
-            head = newNode;
-        }else{
-            newNode.next = head;
-            head = newNode;
-        }
-        size++;
-        return true;
-    }
-
     private boolean pushBack(T data){
-        if(data == null)
-            throw new NullPointerException("Data is null");
-
+        checkIfDataIsNull(data);
         Node<T> newNode = new Node(data);
 
         if(head == null){
@@ -88,6 +70,11 @@ public class SinglyLinkedList<T> {
         size++;
 
         return true;
+    }
+
+    private void checkIfDataIsNull(Object data){
+        if(data == null)
+            throw new NullPointerException("Data is null");
     }
 
     private Node<T> node(int index) {
