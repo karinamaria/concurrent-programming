@@ -18,11 +18,6 @@ public class SinglyLinkedList<T> {
         return pushBack(data);
     }
 
-    public T get(int index){
-        checkElementIndex(index);
-        return node(index).data;
-    }
-
     public boolean contains(Object o){
         lock.readLock().lock();
         System.out.println("[" + Thread.currentThread().getName() + "] Buscando por " + o);
@@ -100,22 +95,6 @@ public class SinglyLinkedList<T> {
     private void checkIfDataIsNull(Object data){
         if(data == null)
             throw new NullPointerException("Data is null");
-    }
-
-    private Node<T> node(int index) {
-        Node<T> x = head;
-        for (int i = 0; i < index; i++)
-            x = x.next;
-        return x;
-    }
-
-    private void checkElementIndex(int index){
-        if (!isElementIndex(index))
-            throw new IndexOutOfBoundsException("Index: "+index+", Size: "+size);
-    }
-
-    private boolean isElementIndex(int index) {
-        return index >= 0 && index < size;
     }
 
     public static class Node<T> {
