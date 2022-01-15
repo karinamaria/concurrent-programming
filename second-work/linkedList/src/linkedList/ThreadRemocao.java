@@ -12,7 +12,7 @@ public class ThreadRemocao extends Thread{
 
     @Override
     public void run() {
-        System.out.println("Thread ["+ this.getName() +"] adicionando "+data);
+        System.out.println("Thread ["+ this.getName() +"] removendo "+data);
         System.out.println("\tRemovido? "+singlyLinkedList.remove(data));
         System.out.println("============================================");
     }
